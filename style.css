@@ -1,0 +1,190 @@
+/* ========== BASIC RESET + BODY ========== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  cursor: url('assets/cross-cursor.png'), auto;
+}
+
+body {
+  font-family: 'VT323', monospace;
+  background: linear-gradient(to bottom, #fcefee, #ffe8f4);
+  color: #3b2c2e;
+  padding: 2rem;
+  line-height: 1.7;
+}
+
+/* ========== TYPOGRAPHY ========== */
+h1, h2, .section-title {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 1.4rem;
+  color: #7d4164;
+  margin-bottom: 1rem;
+  text-shadow: 1px 1px 0 #ffb6c1;
+}
+
+p, li {
+  font-size: 1.2rem;
+}
+
+/* ========== HEADER / GLITCH ========== */
+.glitch-header {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 2.5rem;
+  color: #ff77aa;
+  position: relative;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.glitch-header::before,
+.glitch-header::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  width: 100%;
+  overflow: hidden;
+}
+
+.glitch-header::before {
+  left: 2px;
+  color: #ff00ff;
+  animation: glitch 0.3s infinite linear alternate-reverse;
+}
+
+.glitch-header::after {
+  left: -2px;
+  color: #00ffff;
+  animation: glitch 0.2s infinite linear alternate-reverse;
+}
+
+@keyframes glitch {
+  0% { clip: rect(0, 900px, 0, 0); }
+  50% { clip: rect(0, 900px, 9999px, 0); }
+  100% { clip: rect(0, 900px, 0, 0); }
+}
+
+/* ========== NAVIGATION ========== */
+nav {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+nav a {
+  font-family: 'VT323', monospace;
+  color: #6d3c52;
+  background: #fff0f8;
+  padding: 0.6rem 1rem;
+  border: 1px solid #f7cad0;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: all 0.3s;
+}
+
+nav a:hover {
+  background: #ffd6e0;
+  color: #000;
+}
+
+/* ========== MAIN CONTENT ========== */
+main {
+  max-width: 700px;
+  margin: 0 auto;
+  background: #fff8fc;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 4px 4px 0 #ffbbdd;
+}
+
+/* ========== BLOG LIST ========== */
+.blog-list {
+  list-style: square;
+  padding-left: 1.5rem;
+}
+
+.blog-list li {
+  margin-bottom: 1rem;
+}
+
+.blog-list a {
+  text-decoration: none;
+  color: #5e2a3d;
+}
+
+.blog-list a:hover {
+  text-decoration: underline;
+  color: #a11b4e;
+}
+
+/* ========== ABOUT BOX ========== */
+.about-box {
+  background: #fff0f8;
+  border: 1px dashed #d89cac;
+  padding: 1.5rem;
+  border-radius: 8px;
+}
+
+/* ========== VERSE BOX ========== */
+.verse-box {
+  background: #fff8f8;
+  border-left: 6px solid #d588a9;
+  padding: 1.5rem;
+  font-style: italic;
+}
+
+.verse {
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+}
+
+.reference {
+  text-align: right;
+  font-size: 1rem;
+  color: #7b5966;
+}
+
+/* ========== TYPEWRITER EFFECT ========== */
+.typewriter p {
+  overflow: hidden;
+  border-right: 3px solid #ff99cc;
+  white-space: nowrap;
+  margin: 0 auto;
+  letter-spacing: 2px;
+  animation: typing 4s steps(40, end), blink 0.75s step-end infinite;
+  width: fit-content;
+}
+
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+
+@keyframes blink {
+  from, to { border-color: transparent }
+  50% { border-color: #ff99cc; }
+}
+
+/* ========== MUSIC PLAYER ========== */
+.music-player {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.music-player audio {
+  width: 80%;
+  max-width: 300px;
+  border-radius: 6px;
+  background: #fff0f5;
+  box-shadow: 0 0 8px #ffaad4;
+}
+
+/* ========== FOOTER ========== */
+footer {
+  text-align: center;
+  margin-top: 3rem;
+  font-size: 0.9rem;
+  color: #98707a;
+}
