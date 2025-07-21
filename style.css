@@ -188,3 +188,27 @@ footer {
   font-size: 0.9rem;
   color: #98707a;
 }
+
+.chat-wall {
+  margin: 2rem auto;
+  max-width: 600px;
+  background: #fff0f8;
+  padding: 1.5rem;
+  border: 2px dashed #ffb6c1;
+  border-radius: 10px;
+  box-shadow: 2px 2px 5px #d88aa2;
+}
+
+.chat-wall input {
+  padding: 0.5rem;
+  font-family: inherit;
+  width: 70%;
+}
+
+.chat-wall button {
+  padding: 0.5rem 1rem;
+  font-family: inherit;
+  background: #ffaad4;
+  border: none;
+  cursor: pointer;
+}
