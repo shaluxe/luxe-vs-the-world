@@ -8,6 +8,25 @@
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
 </head>
 <body>
+	<section class="chat-wall">
+  <h2>💬 Message Wall</h2>
+  <ul id="messages"></ul>
+  <input id="msgInput" placeholder="say something..." />
+  <button onclick="addMessage()">send</button>
+</section>
+	
+<script>
+  function addMessage() {
+    const input = document.getElementById("msgInput");
+    const list = document.getElementById("messages");
+    if(input.value.trim() === "") return; // avoid empty messages
+    const item = document.createElement("li");
+    item.textContent = input.value;
+    list.appendChild(item);
+    input.value = "";
+  }
+</script>
+
 
   <div class="glitch-header" data-text="Luxe vs the World">Luxe vs the World</div>
 
