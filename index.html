@@ -82,6 +82,10 @@
   }
 </script>
 
+	<div id="bff-message" class="bff-popup hidden">
+  <span id="bff-text">💌 Luxe.exe is glowing today</span>
+</div>
+
 
   <div class="glitch-header" data-text="Luxe vs the World">Luxe vs the World</div>
 
@@ -104,5 +108,39 @@
   </footer>
 
   <script src="script.js"></script>
+	<script>
+  const bffMessages = [
+    "💌 Luxe.exe is glowing today",
+    "🧃 You’ve got new verses to check",
+    "📟 Incoming message from ur lord and savior",
+    "🧁 You're God's child, ok?",
+    "🌐 The web is lucky to have you",
+    "💿 Fruits of the spirit loading...",
+    "💖 You are the glitter in the ",
+    "🎀 Dicernment detected!"
+  ];
+
+  function showBFFMessage() {
+    const msgBox = document.getElementById("bff-message");
+    const msgText = document.getElementById("bff-text");
+    const randomMsg = bffMessages[Math.floor(Math.random() * bffMessages.length)];
+
+    msgText.textContent = randomMsg;
+    msgBox.classList.remove("hidden");
+
+    setTimeout(() => {
+      msgBox.classList.add("hidden");
+    }, 4000); // disappears after 4 sec
+  }
+
+  function startBFFPopups() {
+    setInterval(() => {
+      showBFFMessage();
+    }, Math.random() * (30000 - 10000) + 10000); // every 10-30 sec
+  }
+
+  window.addEventListener("load", startBFFPopups);
+</script>
+
 </body>
 </html>
