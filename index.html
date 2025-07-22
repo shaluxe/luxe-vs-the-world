@@ -131,13 +131,13 @@
 
     setTimeout(() => {
       msgBox.classList.add("hidden");
-    }, 4000); // disappears after 4 sec
+    }, 4000); // disappears after 10 sec
   }
 
   function startBFFPopups() {
     setInterval(() => {
       showBFFMessage();
-    }, Math.random() * (30000 - 10000) + 10000); // every 10-30 sec
+    }, Math.random() * (30000 - 10000) + 10000); // every 10 sec
   }
 
   window.addEventListener("load", startBFFPopups);
