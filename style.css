@@ -212,3 +212,15 @@ footer {
   border: none;
   cursor: pointer;
 }
+
+.status-bar {
+  text-align: center;
+  margin-top: 2rem;
+  font-size: 1.2rem;
+  font-family: 'VT323', monospace;
+}
+
+.status-bar span {
+  display: block;
+  margin: 0.5rem 0;
+}
