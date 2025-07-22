@@ -8,6 +8,21 @@
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
 </head>
 <body>
+	<div class="status-bar">
+  <span id="nowPlaying">🎧 Now Playing: “Stars Are Blind” – Paris Hilton</span>
+  <span id="visitorCount">👁️ You’re visitor #<span id="counter">00000</span></span>
+</div>
+	
+<script>
+  window.addEventListener("load", () => {
+    let fakeCount = Number(localStorage.getItem("luxeFakeCounter")) || 1342;
+    fakeCount += Math.floor(Math.random() * 3) + 1;
+    localStorage.setItem("luxeFakeCounter", fakeCount);
+    document.getElementById("counter").textContent = String(fakeCount).padStart(5, '0');
+  });
+</script>
+
+
 	<section class="chat-wall">
   <h2>💬 Message Wall</h2>
   <ul id="messages"></ul>
