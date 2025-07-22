@@ -224,3 +224,51 @@ footer {
   display: block;
   margin: 0.5rem 0;
 }
+
+.chat-wall {
+  max-width: 600px;
+  margin: 2rem auto;
+  background: #fff0f8;
+  padding: 1.5rem;
+  border: 2px dashed #ffb6c1;
+  border-radius: 10px;
+  box-shadow: 2px 2px 5px #d88aa2;
+  font-family: 'VT323', monospace;
+  color: #3b2c2e;
+}
+
+.chat-wall ul {
+  list-style: none;
+  max-height: 200px;
+  overflow-y: auto;
+  padding-left: 0;
+  margin-bottom: 1rem;
+}
+
+.chat-wall li {
+  margin-bottom: 0.5rem;
+  border-bottom: 1px dotted #ffb6c1;
+  padding-bottom: 0.3rem;
+}
+
+.chat-wall input {
+  width: 70%;
+  padding: 0.5rem;
+  font-family: inherit;
+  margin-right: 0.5rem;
+  border: 1px solid #ffaad4;
+  border-radius: 4px;
+}
+
+.chat-wall button {
+  padding: 0.5rem 1rem;
+  background: #ffaad4;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  border-radius: 4px;
+}
+
+.chat-wall button:hover {
+  background: #ff8fc0;
+}
