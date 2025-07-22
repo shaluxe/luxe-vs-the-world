@@ -22,16 +22,14 @@
   });
 </script>
 
-
-	<section class="chat-wall">
+<section class="chat-wall">
   <h2>💬 Message Wall</h2>
   <ul id="messages"></ul>
   <input id="msgInput" placeholder="say something..." />
   <button onclick="addMessage()">send</button>
-
+</section>
 		
-<script>
-	
+<script>	
   window.addEventListener("load", () => {
     const messages = JSON.parse(localStorage.getItem("chatMessages")) || [];
     const timestamp = localStorage.getItem("chatTimestamp");
@@ -71,10 +69,6 @@
     list.appendChild(item);
   }
 </script>
-
-</section>
-
-</section>
 	
 <script>
   function addMessage() {
