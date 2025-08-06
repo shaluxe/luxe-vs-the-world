@@ -9,7 +9,7 @@
 </head>
 <body>
 	<div class="status-bar">
-  <span id="nowPlaying">🎧 Now Playing: “Jehova Eh” – David Forlu</span>
+  <span id="nowPlaying">🎧 Now Playing: “Alpha and Omega” – Isreal & New Breed</span>
   <span id="visitorCount">You’re visitor #<span id="counter">00000</span></span>
 </div>
 	
@@ -22,64 +22,6 @@
   });
 </script>
 
-<section class="chat-wall">
-  <h2>💬 Message Wall</h2>
-  <ul id="messages"></ul>
-  <input id="msgInput" placeholder="say something..." />
-  <button onclick="addMessage()">send</button>
-</section>
-		
-<script>	
-  window.addEventListener("load", () => {
-    const messages = JSON.parse(localStorage.getItem("chatMessages")) || [];
-    const timestamp = localStorage.getItem("chatTimestamp");
-    const now = Date.now();
-
-    // Clear messages if older than 24 hours
-    if (timestamp && now - Number(timestamp) > 86400000) {
-      localStorage.removeItem("chatMessages");
-      localStorage.removeItem("chatTimestamp");
-      messages.length = 0; // clear array
-    }
-
-    // Display saved messages
-    messages.forEach(msg => addMessageToDOM(msg));
-  });
-
-  function addMessage() {
-    const input = document.getElementById("msgInput");
-    const message = input.value.trim();
-    if (!message) return;
-
-    addMessageToDOM(message);
-
-    // Save message
-    let messages = JSON.parse(localStorage.getItem("chatMessages")) || [];
-    messages.push(message);
-    localStorage.setItem("chatMessages", JSON.stringify(messages));
-    localStorage.setItem("chatTimestamp", Date.now());
-
-    input.value = "";
-  }
-
-  function addMessageToDOM(message) {
-    const list = document.getElementById("messages");
-    const item = document.createElement("li");
-    item.textContent = message;
-    list.appendChild(item);
-  }
-</script>
-	
-<script>
-  function addMessage() {
-    const input = document.getElementById("msgInput");
-    const list = document.getElementById("messages");
-    if(input.value.trim() === "") return; // avoid empty messages
-    const item = document.createElement("li");
-    item.textContent = input.value;
-    list.appendChild(item);
-    input.value = "";
-  }
 </script>
 
 	<div id="bff-message" class="bff-popup hidden">
