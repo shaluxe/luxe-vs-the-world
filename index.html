@@ -86,3 +86,85 @@
 </script>
 </body>
 </html>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Featured Blogs Spotlight - Text Only</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+  body {
+    background: #000814;
+    color: #00fff7;
+    font-family: 'Press Start 2P', cursive;
+    margin: 40px;
+  }
+
+  .spotlight-container {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  h2 {
+    text-align: center;
+    font-size: 20px;
+    margin-bottom: 30px;
+    text-shadow: 2px 2px #ff00ff;
+  }
+
+  .blog-cards {
+    display: flex;
+    gap: 25px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .blog-card {
+    background: #001f3f;
+    border: 4px solid #00fff7;
+    border-radius: 4px;
+    width: 280px;
+    height: 160px;
+    box-shadow:
+      0 0 0 2px #ff00ff,
+      4px 4px 0 #00fff7;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    text-align: center;
+    color: #ff00ff;
+    font-size: 14px;
+    text-shadow: 1px 1px #000;
+  }
+
+  .blog-card:hover {
+    transform: scale(1.05);
+    box-shadow:
+      0 0 0 2px #ff00ff,
+      6px 6px 0 #00fff7;
+  }
+</style>
+</head>
+<body>
+
+<div class="spotlight-container">
+  <h2>✨ Featured Blogs Spotlight ✨</h2>
+  <div class="blog-cards">
+    <a href="#" class="blog-card" title="Blog Post 1">
+      No More Podcasts?
+    </a>
+
+    <a href="#" class="blog-card" title="Blog Post 2">
+      Post Grad Life
+    </a>
+  </div>
+</div>
+
+</body>
+</html>
