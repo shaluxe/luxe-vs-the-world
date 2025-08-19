@@ -12,20 +12,104 @@
   <span id="nowPlaying">🎧 Now Playing: “Alpha and Omega” – Isreal & New Breed</span>
   <span id="visitorCount">You’re visitor #<span id="counter">00000</span></span>
 </div>
-	<section id="guestbook">
-  <h2>💬 Guestbook</h2>
-  
-  <form id="comment-form">
-    <input type="text" id="name" placeholder="Your name (optional)">
-    <textarea id="message" placeholder="Say something..." required></textarea>
-    <button type="submit">Post</button>
-  </form>
+	<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chat-Style Guestbook</title>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; max-width: 600px; margin: auto; background: #f0f2f5; }
+    h1 { text-align: center; }
+    .input-container { display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px; }
+    input, textarea { padding: 10px; border-radius: 8px; border: 1px solid #ccc; width: 100%; }
+    button { padding: 10px; border-radius: 8px; border: none; background: #4a90e2; color: white; cursor: pointer; font-weight: bold; }
+    button:hover { background: #357ab8; }
 
-  <div id="comments"></div>
-</section>
+    #messageList { list-style: none; padding: 10px; height: 400px; overflow-y: auto; display: flex; flex-direction: column-reverse; gap: 10px; }
+    li { max-width: 80%; padding: 10px; border-radius: 12px; position: relative; word-wrap: break-word; }
+    .message-left { background: #ffffff; align-self: flex-start; }
+    .message-right { background: #4a90e2; color: white; align-self: flex-end; }
+    .timestamp { font-size: 0.7em; color: #888; margin-top: 5px; display: block; text-align: right; }
+  </style>
+</head>
+<body>
 
-<!-- include your script.js -->
-<script type="module" src="script.js"></script>
+<h1>Chat-Style Guestbook</h1>
+
+<div class="input-container">
+  <input type="text" id="name" placeholder="Your name">
+  <textarea id="message" placeholder="Your message"></textarea>
+  <button onclick="submitMessage()">Send</button>
+</div>
+
+<ul id="messageList"></ul>
+
+<script>
+  // 🔑 Replace with your Supabase project info
+  const supabaseUrl = 'https://dsjyxlyugyetjxxvunse.supabase.co';
+  const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRzanl4bHl1Z3lldGp4eHZ1bnNlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTU2NDAzNDUsImV4cCI6MjA3MTIxNjM0NX0.MTCu1cfUkDT3yGqrbxVPhBj5pksnIfenP18cYK2rxTU';
+  const supabase = supabase.createClient(supabaseUrl, supabaseKey);
+
+  // Submit a message
+  async function submitMessage() {
+    const name = document.getElementById('name').value.trim();
+    const message = document.getElementById('message').value.trim();
+
+    if (!name || !message) return alert('Please enter both name and message.');
+
+    const { error } = await supabase
+      .from('guestbook')
+      .insert([{ name, message }]);
+
+    if (error) {
+      console.error(error);
+      alert('Error saving message');
+    } else {
+      document.getElementById('message').value = '';
+    }
+  }
+
+  // Render a message
+  function renderMessage(msg, index) {
+    const list = document.getElementById('messageList');
+    const li = document.createElement('li');
+
+    const time = new Date(msg.created_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    li.innerHTML = `<strong>${msg.name}:</strong> ${msg.message} <span class="timestamp">${time}</span>`;
+
+    // Alternate sides
+    li.className = index % 2 === 0 ? 'message-left' : 'message-right';
+    list.prepend(li);
+  }
+
+  // Fetch existing messages
+  async function fetchMessages() {
+    const { data } = await supabase
+      .from('guestbook')
+      .select('*')
+      .order('created_at', { ascending: false });
+
+    const list = document.getElementById('messageList');
+    list.innerHTML = '';
+    data.forEach((msg, idx) => renderMessage(msg, idx));
+  }
+
+  // Real-time subscription
+  supabase
+    .channel('public:guestbook')
+    .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'guestbook' }, payload => {
+      renderMessage(payload.new, 0); // new messages on right
+    })
+    .subscribe();
+
+  fetchMessages();
+</script>
+
+</body>
+</html>
+
 
 <script>
   window.addEventListener("load", () => {
