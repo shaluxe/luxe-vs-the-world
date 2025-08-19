@@ -42,21 +42,21 @@
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
 <script>
-  
-import { createClient } from '@supabase/supabase-js'
+  // 1️⃣ Replace these with your Supabase project info
+  const supabaseUrl = 'https://dsjyxlyugyetjxxvunse.supabase.co';
+  const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRzanl4bHl1Z3lldGp4eHZ1bnNlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTU2NDAzNDUsImV4cCI6MjA3MTIxNjM0NX0.MTCu1cfUkDT3yGqrbxVPhBj5pksnIfenP18cYK2rxTU';
+  const supabase = supabase.createClient(supabaseUrl, supabaseKey);
 
-const supabaseUrl = 'https://dsjyxlyugyetjxxvunse.supabase.co'
-const supabaseKey = process.env.SUPABASE_KEY
-const supabase = createClient(supabaseUrl, supabaseKey)
-
+  // 2️⃣ Submit message
   async function submitMessage() {
-    console.log("Button clicked");
+    console.log("Post button clicked");
     const name = document.getElementById('name').value.trim();
     const message = document.getElementById('message').value.trim();
     if (!name || !message) return alert('Please enter both name and message.');
 
-    const { error, data } = await supabase.from('guestbook').insert([{ name, message }]);
-    console.log("Insert result:", error, data);
+    const { data, error } = await supabase.from('guestbook').insert([{ name, message }]);
+    console.log("Insert result:", data, error);
+
     if (error) {
       alert('Error: ' + error.message);
     } else {
@@ -65,15 +65,17 @@ const supabase = createClient(supabaseUrl, supabaseKey)
     }
   }
 
+  // 3️⃣ Render a message
   function renderMessage(msg) {
     const list = document.getElementById('messageList');
     const li = document.createElement('li');
     const time = new Date(msg.created_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
     li.innerHTML = `<strong>${msg.name}</strong> <span>(${time})</span><br>${msg.message}`;
     list.appendChild(li);
-    list.scrollTop = list.scrollHeight;
+    list.scrollTop = list.scrollHeight; // auto-scroll
   }
 
+  // 4️⃣ Fetch messages on page load
   async function fetchMessages() {
     const { data } = await supabase.from('guestbook').select('*').order('created_at', { ascending: true });
     const list = document.getElementById('messageList');
@@ -81,7 +83,7 @@ const supabase = createClient(supabaseUrl, supabaseKey)
     data.forEach(renderMessage);
   }
 
-  // Real-time updates
+  // 5️⃣ Real-time updates
   supabase
     .channel('public:guestbook')
     .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'guestbook' }, payload => {
