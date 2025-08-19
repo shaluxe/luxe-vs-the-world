@@ -12,7 +12,65 @@
   <span id="nowPlaying">🎧 Now Playing: “Alpha and Omega” – Isreal & New Breed</span>
   <span id="visitorCount">You’re visitor #<span id="counter">00000</span></span>
 </div>
-	
+	<div id="guestbook-widget" style="max-width:300px; margin:10px auto; padding:10px; border:1px solid #ccc; border-radius:8px; background:#fafafa; font-family:Arial,sans-serif;">
+  <h4 style="margin:0 0 5px 0; text-align:center;">Guestbook 💌</h4>
+  <input type="text" id="name" placeholder="Your name" style="width:100%; margin-bottom:5px; padding:5px; border-radius:4px; border:1px solid #ccc;">
+  <textarea id="message" placeholder="Your message" style="width:100%; margin-bottom:5px; padding:5px; border-radius:4px; border:1px solid #ccc; resize:none;"></textarea>
+  <button onclick="submitMessage()" style="width:100%; padding:5px; border:none; border-radius:4px; background:#ff9f9f; color:white; cursor:pointer;">Sign 💖</button>
+  <ul id="messageList" style="list-style:none; padding-left:0; margin-top:10px; max-height:150px; overflow-y:auto;"></ul>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+<script>
+  // Replace with your Supabase info
+  const supabaseUrl = 'https://dsjyxlyugyetjxxvunse.supabase.co';
+  const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRzanl4bHl1Z3lldGp4eHZ1bnNlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTU2NDAzNDUsImV4cCI6MjA3MTIxNjM0NX0.MTCu1cfUkDT3yGqrbxVPhBj5pksnIfenP18cYK2rxTU';
+  const supabase = supabase.createClient(supabaseUrl, supabaseKey);
+
+  async function submitMessage() {
+    const name = document.getElementById('name').value.trim();
+    const message = document.getElementById('message').value.trim();
+    if (!name || !message) return alert('Please enter both name and message.');
+
+    const { error } = await supabase.from('guestbook').insert([{ name, message }]);
+    if (error) {
+      console.error(error);
+      alert('Error saving message');
+    } else {
+      document.getElementById('name').value = '';
+      document.getElementById('message').value = '';
+    }
+  }
+
+  function renderMessage(msg) {
+    const list = document.getElementById('messageList');
+    const li = document.createElement('li');
+    const time = new Date(msg.created_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    li.textContent = `${msg.name} (${time}): ${msg.message}`;
+    li.style.padding = "3px 0";
+    li.style.borderBottom = "1px solid #eee";
+    li.style.fontSize = "0.85em";
+    list.appendChild(li);
+  }
+
+  async function fetchMessages() {
+    const { data } = await supabase.from('guestbook').select('*').order('created_at', { ascending: true });
+    const list = document.getElementById('messageList');
+    list.innerHTML = '';
+    data.forEach(renderMessage);
+  }
+
+  // Real-time updates
+  supabase
+    .channel('public:guestbook')
+    .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'guestbook' }, payload => {
+      renderMessage(payload.new);
+    })
+    .subscribe();
+
+  fetchMessages();
+</script>
+
   </style>
 </head>
 <body>
