@@ -305,3 +305,42 @@ footer {
     50% { border-color: #ff00ff; }
   }
 </style>
+#guestbook {
+  margin: 2rem 0;
+  padding: 1rem;
+  border: 2px solid #ff9ddc;
+  border-radius: 12px;
+  background: #ffe6f2;
+}
+
+#comment-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+#comment-form input,
+#comment-form textarea {
+  padding: 0.6rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+#comment-form button {
+  padding: 0.6rem;
+  background: #ff69b4;
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+#comments {
+  margin-top: 1rem;
+}
+
+.comment {
+  padding: 0.8rem;
+  border-bottom: 1px solid #ddd;
+}
