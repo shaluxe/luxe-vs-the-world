@@ -19,29 +19,41 @@
   <button onclick="submitMessage()" style="width:100%; padding:5px; border:none; border-radius:4px; background:#ff9f9f; color:white; cursor:pointer;">Sign 💖</button>
   <ul id="messageList" style="list-style:none; padding-left:0; margin-top:10px; max-height:150px; overflow-y:auto;"></ul>
 </div>
+<!-- Guestbook Widget -->
+<div id="guestbook-widget" style="max-width:300px; margin:10px auto; padding:10px; border:1px solid #ccc; border-radius:8px; background:#fafafa; font-family:Arial,sans-serif;">
+  <h4 style="margin:0 0 5px 0; text-align:center;">Guestbook 💌</h4>
+  <input type="text" id="name" placeholder="Your name" style="width:100%; margin-bottom:5px; padding:5px; border-radius:4px; border:1px solid #ccc;">
+  <textarea id="message" placeholder="Your message" style="width:100%; margin-bottom:5px; padding:5px; border-radius:4px; border:1px solid #ccc; resize:none;"></textarea>
+  <button onclick="submitMessage()" style="width:100%; padding:5px; border:none; border-radius:4px; background:#ff9f9f; color:white; cursor:pointer;">Post 💖</button>
+  <ul id="messageList" style="list-style:none; padding-left:0; margin-top:10px; max-height:150px; overflow-y:auto;"></ul>
+</div>
 
+<!-- Supabase JS -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
 <script>
-  // Replace with your Supabase info
+  // Your Supabase info
   const supabaseUrl = 'https://dsjyxlyugyetjxxvunse.supabase.co';
   const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRzanl4bHl1Z3lldGp4eHZ1bnNlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTU2NDAzNDUsImV4cCI6MjA3MTIxNjM0NX0.MTCu1cfUkDT3yGqrbxVPhBj5pksnIfenP18cYK2rxTU';
   const supabase = supabase.createClient(supabaseUrl, supabaseKey);
 
+  // Submit message
   async function submitMessage() {
+    console.log("Button clicked");
     const name = document.getElementById('name').value.trim();
     const message = document.getElementById('message').value.trim();
     if (!name || !message) return alert('Please enter both name and message.');
 
-    const { error } = await supabase.from('guestbook').insert([{ name, message }]);
+    const { error, data } = await supabase.from('guestbook').insert([{ name, message }]);
+    console.log(error, data);
     if (error) {
-      console.error(error);
-      alert('Error saving message');
+      alert('Error: ' + error.message);
     } else {
       document.getElementById('name').value = '';
       document.getElementById('message').value = '';
     }
   }
 
+  // Render message in list
   function renderMessage(msg) {
     const list = document.getElementById('messageList');
     const li = document.createElement('li');
@@ -53,6 +65,7 @@
     list.appendChild(li);
   }
 
+  // Fetch existing messages
   async function fetchMessages() {
     const { data } = await supabase.from('guestbook').select('*').order('created_at', { ascending: true });
     const list = document.getElementById('messageList');
@@ -70,6 +83,7 @@
 
   fetchMessages();
 </script>
+
 
   </style>
 </head>
