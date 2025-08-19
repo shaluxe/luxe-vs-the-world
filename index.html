@@ -11,24 +11,44 @@
 	<div class="status-bar">
   <span id="nowPlaying">🎧 Now Playing: “Alpha and Omega” – Isreal & New Breed</span>
   <span id="visitorCount">You’re visitor #<span id="counter">00000</span></span>
-<!-- Guestbook Widget -->
-<div id="guestbook-widget" style="max-width:300px; margin:10px auto; padding:10px; border:1px solid #ccc; border-radius:8px; background:#fafafa; font-family:Arial,sans-serif;">
-  <h4 style="margin:0 0 5px 0; text-align:center;">Guestbook 💌</h4>
-  <input type="text" id="name" placeholder="Your name" style="width:100%; margin-bottom:5px; padding:5px; border-radius:4px; border:1px solid #ccc;">
-  <textarea id="message" placeholder="Your message" style="width:100%; margin-bottom:5px; padding:5px; border-radius:4px; border:1px solid #ccc; resize:none;"></textarea>
-  <button onclick="submitMessage()" style="width:100%; padding:5px; border:none; border-radius:4px; background:#ff9f9f; color:white; cursor:pointer;">Post 💖</button>
-  <ul id="messageList" style="list-style:none; padding-left:0; margin-top:10px; max-height:150px; overflow-y:auto;"></ul>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guestbook</title>
+<style>
+  body { font-family: Arial, sans-serif; background: #fff8f0; display: flex; justify-content: center; padding-top: 20px; }
+  #guestbook-widget { max-width: 300px; width: 100%; padding: 12px; border-radius: 12px; background: #fff; box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
+  #guestbook-widget h4 { margin: 0 0 10px 0; text-align: center; color: #ff6f91; }
+  #guestbook-widget input, #guestbook-widget textarea { width: 100%; margin-bottom: 5px; padding: 6px; border-radius: 6px; border: 1px solid #ffd6d6; box-sizing: border-box; }
+  #guestbook-widget textarea { resize: none; }
+  #guestbook-widget button { width: 100%; padding: 6px; border: none; border-radius: 6px; background: #ff9f9f; color: white; font-weight: bold; cursor: pointer; }
+  #messageList { list-style: none; padding-left: 0; margin-top: 10px; max-height: 200px; overflow-y: auto; border-top: 1px solid #ffe0e0; }
+  #messageList li { padding: 5px; margin-bottom: 5px; border-radius: 8px; background: #fff0f5; word-break: break-word; }
+  #messageList li strong { color: #ff6f91; }
+  #messageList li span { color: #999; font-size: 0.75em; }
+</style>
+</head>
+<body>
+
+<div id="guestbook-widget">
+  <h4>Guestbook 💌</h4>
+  <input type="text" id="name" placeholder="Your name">
+  <textarea id="message" placeholder="Your message"></textarea>
+  <button onclick="submitMessage()">Post 💖</button>
+  <ul id="messageList"></ul>
 </div>
 
-<!-- Supabase JS -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
 <script>
-  // Your Supabase info
-  const supabaseUrl = 'https://dsjyxlyugyetjxxvunse.supabase.co';
-  const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRzanl4bHl1Z3lldGp4eHZ1bnNlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTU2NDAzNDUsImV4cCI6MjA3MTIxNjM0NX0.MTCu1cfUkDT3yGqrbxVPhBj5pksnIfenP18cYK2rxTU';
-  const supabase = supabase.createClient(supabaseUrl, supabaseKey);
+  
+import { createClient } from '@supabase/supabase-js'
 
-  // Submit message
+const supabaseUrl = 'https://dsjyxlyugyetjxxvunse.supabase.co'
+const supabaseKey = process.env.SUPABASE_KEY
+const supabase = createClient(supabaseUrl, supabaseKey)
+
   async function submitMessage() {
     console.log("Button clicked");
     const name = document.getElementById('name').value.trim();
@@ -36,7 +56,7 @@
     if (!name || !message) return alert('Please enter both name and message.');
 
     const { error, data } = await supabase.from('guestbook').insert([{ name, message }]);
-    console.log(error, data);
+    console.log("Insert result:", error, data);
     if (error) {
       alert('Error: ' + error.message);
     } else {
@@ -45,19 +65,15 @@
     }
   }
 
-  // Render message in list
   function renderMessage(msg) {
     const list = document.getElementById('messageList');
     const li = document.createElement('li');
     const time = new Date(msg.created_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-    li.textContent = `${msg.name} (${time}): ${msg.message}`;
-    li.style.padding = "3px 0";
-    li.style.borderBottom = "1px solid #eee";
-    li.style.fontSize = "0.85em";
+    li.innerHTML = `<strong>${msg.name}</strong> <span>(${time})</span><br>${msg.message}`;
     list.appendChild(li);
+    list.scrollTop = list.scrollHeight;
   }
 
-  // Fetch existing messages
   async function fetchMessages() {
     const { data } = await supabase.from('guestbook').select('*').order('created_at', { ascending: true });
     const list = document.getElementById('messageList');
@@ -75,6 +91,9 @@
 
   fetchMessages();
 </script>
+
+</body>
+</html>
 
 
   </style>
