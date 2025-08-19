@@ -36,79 +36,72 @@
 </head>
 <body>
 
-<h1>Chat-Style Guestbook</h1>
-
-<div class="input-container">
+<div>
+  <h2>Guestbook</h2>
   <input type="text" id="name" placeholder="Your name">
   <textarea id="message" placeholder="Your message"></textarea>
-  <button onclick="submitMessage()">Send</button>
+  <button onclick="submitMessage()">Sign Guestbook</button>
 </div>
 
-<ul id="messageList"></ul>
+<ul id="messageList" style="list-style: none; padding-left: 0;"></ul>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
 <script>
-  // 🔑 Replace with your Supabase project info
+  // Replace with your Supabase info
   const supabaseUrl = 'https://dsjyxlyugyetjxxvunse.supabase.co';
   const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRzanl4bHl1Z3lldGp4eHZ1bnNlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTU2NDAzNDUsImV4cCI6MjA3MTIxNjM0NX0.MTCu1cfUkDT3yGqrbxVPhBj5pksnIfenP18cYK2rxTU';
   const supabase = supabase.createClient(supabaseUrl, supabaseKey);
 
-  // Submit a message
   async function submitMessage() {
     const name = document.getElementById('name').value.trim();
     const message = document.getElementById('message').value.trim();
-
     if (!name || !message) return alert('Please enter both name and message.');
 
-    const { error } = await supabase
-      .from('guestbook')
-      .insert([{ name, message }]);
-
+    const { error } = await supabase.from('guestbook').insert([{ name, message }]);
     if (error) {
       console.error(error);
       alert('Error saving message');
     } else {
+      document.getElementById('name').value = '';
       document.getElementById('message').value = '';
     }
   }
 
-  // Render a message
-  function renderMessage(msg, index) {
+  function renderMessage(msg) {
     const list = document.getElementById('messageList');
     const li = document.createElement('li');
 
-    const time = new Date(msg.created_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-    li.innerHTML = `<strong>${msg.name}:</strong> ${msg.message} <span class="timestamp">${time}</span>`;
+    const time = new Date(msg.created_at).toLocaleString();
+    li.innerHTML = `
+      <strong>${msg.name}</strong> <span style="color: gray; font-size: 0.8em;">(${time})</span><br>
+      ${msg.message}
+    `;
 
-    // Alternate sides
-    li.className = index % 2 === 0 ? 'message-left' : 'message-right';
-    list.prepend(li);
+    li.style.padding = "8px";
+    li.style.borderBottom = "1px solid #ddd";
+    li.style.marginBottom = "5px";
+
+    list.appendChild(li);
   }
 
-  // Fetch existing messages
   async function fetchMessages() {
-    const { data } = await supabase
-      .from('guestbook')
-      .select('*')
-      .order('created_at', { ascending: false });
-
+    const { data } = await supabase.from('guestbook').select('*').order('created_at', { ascending: true });
     const list = document.getElementById('messageList');
     list.innerHTML = '';
-    data.forEach((msg, idx) => renderMessage(msg, idx));
+    data.forEach(renderMessage);
   }
 
-  // Real-time subscription
+  // Real-time updates
   supabase
     .channel('public:guestbook')
     .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'guestbook' }, payload => {
-      renderMessage(payload.new, 0); // new messages on right
+      renderMessage(payload.new);
     })
     .subscribe();
 
   fetchMessages();
 </script>
 
-</body>
-</html>
 
 
 <script>
