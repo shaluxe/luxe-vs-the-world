@@ -12,7 +12,21 @@
   <span id="nowPlaying">🎧 Now Playing: “Alpha and Omega” – Isreal & New Breed</span>
   <span id="visitorCount">You’re visitor #<span id="counter">00000</span></span>
 </div>
-	
+	<section id="guestbook">
+  <h2>💬 Guestbook</h2>
+  
+  <form id="comment-form">
+    <input type="text" id="name" placeholder="Your name (optional)">
+    <textarea id="message" placeholder="Say something..." required></textarea>
+    <button type="submit">Post</button>
+  </form>
+
+  <div id="comments"></div>
+</section>
+
+<!-- include your script.js -->
+<script type="module" src="script.js"></script>
+
 <script>
   window.addEventListener("load", () => {
     let fakeCount = Number(localStorage.getItem("luxeFakeCounter")) || 1342;
