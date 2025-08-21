@@ -9,7 +9,7 @@
 </head>
 <body>
 	<div class="status-bar">
-  <span id="nowPlaying">🎧 Now Playing: “Alpha and Omega” – Isreal & New Breed</span>
+  <span id="nowPlaying">🎧 Now Playing: “The story I'll tell” – Naomi Raine</span>
   <span id="visitorCount">You’re visitor #<span id="counter">00000</span></span>
 <!DOCTYPE html>
 <html lang="en">
@@ -26,7 +26,7 @@
 <script>
   window.addEventListener("load", () => {
     let fakeCount = Number(localStorage.getItem("luxeFakeCounter")) || 1342;
-    fakeCount += Math.floor(Math.random() * 3) + 1;
+    fakeCount += Math.floor(Math.random() * 1) + 1;
     localStorage.setItem("luxeFakeCounter", fakeCount);
     document.getElementById("counter").textContent = String(fakeCount).padStart(5, '0');
   });
@@ -168,15 +168,14 @@
   <div class="spotlight-container">
     <h2>✨ Featured Blogs Spotlight ✨</h2>
     <div class="blog-cards">
-      <a href="posts/first-post.html" class="blog-card" title="No More Podcasts?">
-        No More Podcast???
-      </a>
-
-      <a href="posts/second-post.html" class="blog-card" title="Post Grad Life">
+     <a href="posts/second-post.html" class="blog-card" title="Post Grad Life">
         Post Grad Life
       </a>
       <a href="posts/third-post.html" class="blog-card" title="Side of the Road, Center of His Will">
         Side of the Road, Center of His Will
+      </a>
+      <a href="posts/fourth-post.html" class="blog-card" title="Alive in flesh, Absent in Friendship">
+        Alive in flesh, Absent in Friendship
 	  </a>
     </div>
   </div>
