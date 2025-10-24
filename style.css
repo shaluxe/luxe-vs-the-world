@@ -9,7 +9,7 @@
 body {
   font-family: 'VT323', monospace;
   background: linear-gradient(to bottom, #fcefee, #ffe8f4);
-  color: #8F9779;
+  color: #6A0DAD;
   padding: 2rem;
   line-height: 1.7;
 }
@@ -18,9 +18,9 @@ body {
 h1, h2, .section-title {
   font-family: 'Press Start 2P', cursive;
   font-size: 1.4rem;
-  color: #7d4164;
+  color: #6A0DAD;
   margin-bottom: 1rem;
-  text-shadow: 1px 1px 0 #ffb6c1;
+  text-shadow: 1px 1px 0 #A8D5BA;
 }
 
 p, li {
@@ -31,7 +31,7 @@ p, li {
 .glitch-header {
   font-family: 'Press Start 2P', cursive;
   font-size: 2.5rem;
-  color: #ff77aa;
+  color: #A8D5BA;
   position: relative;
   text-align: center;
   margin-bottom: 2rem;
@@ -48,14 +48,14 @@ p, li {
 
 .glitch-header::before {
   left: 2px;
-  color: #ff00ff;
-  animation: glitch 0.3s infinite linear alternate-reverse;
+  color: #6A0DAD;
+  animation: glitch 0.8s infinite linear alternate-reverse;
 }
 
 .glitch-header::after {
   left: -2px;
-  color: #00ffff;
-  animation: glitch 0.2s infinite linear alternate-reverse;
+  color: #C8A2C8;
+  animation: glitch 0.8s infinite linear alternate-reverse;
 }
 
 @keyframes glitch {
@@ -111,26 +111,26 @@ main {
 
 .blog-list a {
   text-decoration: none;
-  color: #5e2a3d;
+  color: #6A0DAD;
 }
 
 .blog-list a:hover {
   text-decoration: underline;
-  color: #a11b4e;
+  color: #6A0DAD;
 }
 
 /* ========== ABOUT BOX ========== */
 .about-box {
-  background: #87CEEB;
-  border: 1px dashed #d89cac;
+  background: #fff0f8;
+  border: 1px dashed #C8A2C8;
   padding: 1.5rem;
   border-radius: 8px;
 }
 
 /* ========== VERSE BOX ========== */
 .verse-box {
-  background: #87CEEB;
-  border-left: 6px solid #d588a9;
+  background: #fff8f8;
+  border-left: 6px solid #C8A2C8;
   padding: 1.5rem;
   font-style: italic;
 }
@@ -143,13 +143,13 @@ main {
 .reference {
   text-align: right;
   font-size: 1rem;
-  color: #7b5966;
+  color: #C8A2C8;
 }
 
 /* ========== TYPEWRITER EFFECT ========== */
 .typewriter p {
   overflow: hidden;
-  border-right: 3px solid #ff99cc;
+  border-right: 3px solid #C8A2C8;
   white-space: nowrap;
   margin: 0 auto;
   letter-spacing: 2px;
@@ -164,7 +164,7 @@ main {
 
 @keyframes blink {
   from, to { border-color: transparent }
-  50% { border-color: #ff99cc; }
+  50% { border-color: #C8A2C8; }
 }
 
 /* ========== MUSIC PLAYER ========== */
@@ -177,7 +177,7 @@ main {
   width: 80%;
   max-width: 300px;
   border-radius: 6px;
-  background: #87CEEB;
+  background: #C8A2C8;
   box-shadow: 0 0 8px #ffaad4;
 }
 
@@ -186,7 +186,7 @@ footer {
   text-align: center;
   margin-top: 3rem;
   font-size: 0.9rem;
-  color:#87CEEB;
+  color: #6A0DAD;
 }
 
 .chat-wall {
@@ -229,8 +229,8 @@ footer {
   position: fixed;
   bottom: 2rem;
   right: 2rem;
-  background-color: #6A0DAD;
-  border: 2px dashed #C8A2C8;
+  background-color: #C8A2C8;
+  border: 2px dashed #ff69b4;
   padding: 1rem 1.2rem;
   font-family: 'VT323', monospace;
   font-size: 1rem;
@@ -283,11 +283,11 @@ footer {
   .typewriter p {
     font-family: 'Press Start 2P', cursive;
     font-size: 14px;
-    color: #ff00ff;
-    text-shadow: 1px 1px #fff;
+    color: #6A0DAD;
+    text-shadow: 1px 1px #C8A2C8;
     white-space: nowrap;
     overflow: hidden;
-    border-right: 2px solid #8F9779;
+    border-right: 2px solid #6A0DAD;
     width: 0;
     animation:
       typing 4s steps(50, end) forwards,
