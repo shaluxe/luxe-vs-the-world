@@ -9,7 +9,7 @@
 body {
   font-family: 'VT323', monospace;
   background: linear-gradient(to bottom, #fcefee, #ffe8f4);
-  color: #3b2c2e;
+  color: #8F9779;
   padding: 2rem;
   line-height: 1.7;
 }
@@ -121,7 +121,7 @@ main {
 
 /* ========== ABOUT BOX ========== */
 .about-box {
-  background: #fff0f8;
+  background: #87CEEB;
   border: 1px dashed #d89cac;
   padding: 1.5rem;
   border-radius: 8px;
@@ -129,7 +129,7 @@ main {
 
 /* ========== VERSE BOX ========== */
 .verse-box {
-  background: #fff8f8;
+  background: #87CEEB;
   border-left: 6px solid #d588a9;
   padding: 1.5rem;
   font-style: italic;
@@ -177,7 +177,7 @@ main {
   width: 80%;
   max-width: 300px;
   border-radius: 6px;
-  background: #fff0f5;
+  background: #87CEEB;
   box-shadow: 0 0 8px #ffaad4;
 }
 
@@ -186,7 +186,7 @@ footer {
   text-align: center;
   margin-top: 3rem;
   font-size: 0.9rem;
-  color: #98707a;
+  color:#87CEEB;
 }
 
 .chat-wall {
@@ -229,8 +229,8 @@ footer {
   position: fixed;
   bottom: 2rem;
   right: 2rem;
-  background-color: #fff0f8;
-  border: 2px dashed #ff69b4;
+  background-color: #6A0DAD;
+  border: 2px dashed #C8A2C8;
   padding: 1rem 1.2rem;
   font-family: 'VT323', monospace;
   font-size: 1rem;
@@ -287,7 +287,7 @@ footer {
     text-shadow: 1px 1px #fff;
     white-space: nowrap;
     overflow: hidden;
-    border-right: 2px solid #ff00ff;
+    border-right: 2px solid #8F9779;
     width: 0;
     animation:
       typing 4s steps(50, end) forwards,
