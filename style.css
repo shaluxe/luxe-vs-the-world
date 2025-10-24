@@ -1,4 +1,4 @@
-/* ======= BASIC RESET ======= */
+/* ========== BASIC RESET + BODY ========== */
 * {
   margin: 0;
   padding: 0;
@@ -14,41 +14,47 @@ body {
   line-height: 1.7;
 }
 
-/* ===== TYPOGRAPHY ===== */
+/* ========== TYPOGRAPHY ========== */
 h1, h2, .section-title {
   font-family: 'Press Start 2P', cursive;
+  font-size: 1.4rem;
   color: #4B0082; /* Imperial Purple */
   margin-bottom: 1rem;
   text-shadow: 2px 2px #C8A2C8, 4px 4px #FF4D4D;
 }
 
-/* ===== GLITCH HEADER ===== */
+p, li {
+  font-size: 1.2rem;
+}
+
+/* ========== HEADER / GLITCH ========== */
 .glitch-header {
   font-family: 'Press Start 2P', cursive;
   font-size: 2.5rem;
   color: #4B0082; /* Imperial Purple */
-  text-align: left; /* Keep left-aligned */
-  margin-bottom: 2rem;
   position: relative;
+  text-align: left;
+  margin-bottom: 2rem;
+}
+
+.glitch-header::before,
+.glitch-header::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  width: 100%;
+  overflow: hidden;
 }
 
 .glitch-header::before {
-  content: attr(data-text);
-  position: absolute;
   left: 2px;
-  top: 0;
-  width: 100%;
-  color: #C8A2C8; /* Lilac shadow */
+  color: #C8A2C8; /* Lilac */
   animation: glitch 0.3s infinite linear alternate-reverse;
 }
 
 .glitch-header::after {
-  content: attr(data-text);
-  position: absolute;
   left: -2px;
-  top: 0;
-  width: 100%;
-  color: #FF4D4D; /* lighter red shadow */
+  color: #FF4D4D; /* Lighter red */
   animation: glitch 0.2s infinite linear alternate-reverse;
 }
 
@@ -58,17 +64,18 @@ h1, h2, .section-title {
   100% { clip: rect(0, 900px, 0, 0); }
 }
 
-/* ===== NAVIGATION ===== */
+/* ========== NAVIGATION ========== */
 nav {
   display: flex;
   gap: 1rem;
-  flex-wrap: wrap;
+  justify-content: flex-start;
   margin-bottom: 2rem;
+  flex-wrap: wrap;
 }
 
 nav a {
   font-family: 'VT323', monospace;
-  color: #C8A2C8; /* lilac */
+  color: #C8A2C8; /* Lilac */
   background: transparent;
   padding: 0.6rem 1rem;
   border: 1px solid #C8A2C8;
@@ -78,35 +85,167 @@ nav a {
 }
 
 nav a:hover {
-  color: #FF4D4D; /* lighter red */
+  color: #FF4D4D; /* Lighter red */
   border-color: #FF4D4D;
 }
 
-/* ===== MAIN CONTENT ===== */
+/* ========== MAIN CONTENT ========== */
 main {
-  max-width: 800px;
-  width: 100%;
-  background: rgba(75,0,130,0.1); /* subtle imperial purple overlay */
+  max-width: 700px;
+  margin: 0 auto;
+  background: rgba(75,0,130,0.1); /* subtle Imperial Purple overlay */
   padding: 2rem;
   border-radius: 10px;
 }
 
-/* ===== BOXES ===== */
-.about-box, .chat-wall, .bff-popup {
-  background: rgba(75,0,130,0.1); /* subtle imperial purple overlay */
-  border: 2px dashed #C8A2C8; /* lilac border */
-  padding: 1.5rem;
-  border-radius: 8px;
-  margin: 1rem 0;
-  width: 100%;
-  box-sizing: border-box;
+/* ========== BLOG LIST ========== */
+.blog-list {
+  list-style: square;
+  padding-left: 1.5rem;
 }
 
-/* ===== FOOTER ===== */
+.blog-list li {
+  margin-bottom: 1rem;
+}
+
+.blog-list a {
+  text-decoration: none;
+  color: #C8A2C8; /* Lilac */
+}
+
+.blog-list a:hover {
+  text-decoration: underline;
+  color: #FF4D4D;
+}
+
+/* ========== ABOUT BOX ========== */
+.about-box {
+  background: rgba(75,0,130,0.1); /* subtle Imperial Purple overlay */
+  border: 1px dashed #C8A2C8; /* lilac */
+  padding: 1.5rem;
+  border-radius: 8px;
+}
+
+/* ========== VERSE BOX ========== */
+.verse-box {
+  background: rgba(75,0,130,0.1);
+  border-left: 6px solid #C8A2C8; /* Lilac border */
+  padding: 1.5rem;
+  font-style: italic;
+}
+
+.verse {
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+}
+
+.reference {
+  text-align: right;
+  font-size: 1rem;
+  color: #4B0082; /* Imperial Purple */
+}
+
+/* ========== TYPEWRITER EFFECT ========== */
+.typewriter p {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 14px;
+  color: #4B0082; /* Imperial Purple */
+  text-shadow: 1px 1px #C8A2C8;
+  white-space: nowrap;
+  overflow: hidden;
+  border-right: 2px solid #FF4D4D;
+  width: 0;
+  animation:
+    typing 4s steps(50, end) forwards,
+    blink 0.75s step-end infinite;
+  margin: 0 auto;
+  max-width: 90%;
+}
+
+@keyframes typing {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+@keyframes blink {
+  0%, 100% { border-color: transparent; }
+  50% { border-color: #FF4D4D; }
+}
+
+/* ========== MUSIC PLAYER ========== */
+.music-player {
+  margin-top: 2rem;
+  text-align: left;
+}
+
+.music-player audio {
+  width: 80%;
+  max-width: 300px;
+  border-radius: 6px;
+  background: rgba(75,0,130,0.1);
+  box-shadow: 0 0 8px #C8A2C8;
+}
+
+/* ========== FOOTER ========== */
 footer {
   text-align: left;
-  margin-top: 2rem;
-  font-family: 'Playfair Display', serif;
-  color: #C8A2C8; /* lilac */
-  width: 100%;
+  margin-top: 3rem;
+  font-size: 0.9rem;
+  color: #C8A2C8;
+}
+
+/* ========== CHAT WALL ======== */
+.chat-wall {
+  margin: 2rem 0;
+  background: rgba(75,0,130,0.1);
+  padding: 1.5rem;
+  border: 2px dashed #C8A2C8;
+  border-radius: 10px;
+  box-shadow: 2px 2px 5px #C8A2C8;
+}
+
+.chat-wall input {
+  padding: 0.5rem;
+  font-family: inherit;
+  width: 70%;
+}
+
+.chat-wall button {
+  padding: 0.5rem 1rem;
+  font-family: inherit;
+  background: #FF4D4D;
+  border: none;
+  cursor: pointer;
+}
+
+/* ========== BFF POPUP ======== */
+.bff-popup {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  background-color: rgba(75,0,130,0.1);
+  border: 2px dashed #C8A2C8;
+  padding: 1rem 1.2rem;
+  font-family: 'VT323', monospace;
+  font-size: 1rem;
+  box-shadow: 2px 2px 5px #C8A2C8;
+  border-radius: 10px;
+  z-index: 1000;
+  animation: popIn 0.3s ease;
+  transition: opacity 0.3s;
+}
+
+.hidden {
+  display: none;
+}
+
+@keyframes popIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
