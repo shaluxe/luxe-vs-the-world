@@ -1,109 +1,71 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>About Me | Luxe vs the World</title>
-  <link rel="stylesheet" href="style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&family=Playfair+Display:wght@700&family=Lora&display=swap" rel="stylesheet">
-  <style>
-    body {
-      background-color: #8B0000; /* Cherry Red */
-      color: #000000; /* Black text */
-      font-family: 'Lora', serif;
-      margin: 0;
-      padding: 0;
-    }
+body {
+  background-color: #8B0000; /* Cherry Red */
+  color: #000000; /* Black text */
+  font-family: 'Lora', serif;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centers all content horizontally */
+}
 
-    nav {
-      background-color: #4B0082; /* Imperial Purple */
-      padding: 1rem 2rem;
-      display: flex;
-      gap: 1.5rem;
-      justify-content: center;
-      font-family: 'Playfair Display', serif;
-    }
+nav {
+  background-color: #4B0082; /* Imperial Purple */
+  padding: 1rem 2rem;
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+  width: 100%; /* Make nav stretch across */
+  font-family: 'Playfair Display', serif;
+}
 
-    nav a {
-      color: #C8A2C8; /* Lilac links */
-      text-decoration: none;
-      transition: 0.3s;
-    }
+.glitch-header {
+  text-align: center;
+  font-family: 'Playfair Display', serif;
+  font-size: 3rem;
+  color: #4B0082; /* Imperial Purple */
+  margin: 2rem 0;
+  text-shadow: 2px 2px #C8A2C8, 4px 4px #FF4D4D;
+}
 
-    nav a:hover {
-      color: #FF4D4D; /* Lighter red hover */
-    }
+main {
+  max-width: 800px;
+  width: 90%; /* Make main responsive */
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centers content inside main */
+}
 
-    .glitch-header {
-      text-align: center;
-      font-family: 'Playfair Display', serif;
-      font-size: 3rem;
-      color: #4B0082; /* Imperial Purple */
-      margin: 2rem 0;
-      text-shadow: 2px 2px #C8A2C8, 4px 4px #FF4D4D;
-    }
+h2.section-title {
+  color: #4B0082; /* Imperial Purple */
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  text-align: center; /* Center title text */
+}
 
-    main {
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 2rem;
-    }
+.about-box {
+  background: rgba(75,0,130,0.1); /* subtle imperial purple overlay */
+  border-left: 4px solid #C8A2C8; /* lilac accent */
+  padding: 1.5rem 2rem;
+  border-radius: 6px;
+  width: 100%; /* Take full width of main */
+  max-width: 600px; /* Optional: limit max width for better readability */
+  box-sizing: border-box;
+}
 
-    h2.section-title {
-      color: #4B0082; /* Imperial Purple */
-      font-family: 'Playfair Display', serif;
-      font-size: 2rem;
-      margin-bottom: 1rem;
-    }
+.about-box p {
+  margin-bottom: 1rem;
+  text-align: left; /* Keep text left-aligned for readability */
+}
 
-    .about-box {
-      background: rgba(75,0,130,0.1); /* subtle imperial purple overlay */
-      border-left: 4px solid #C8A2C8; /* lilac accent */
-      padding: 1.5rem 2rem;
-      border-radius: 6px;
-    }
-
-    .about-box p {
-      margin-bottom: 1rem;
-    }
-
-    footer {
-      text-align: center;
-      padding: 1.5rem 0;
-      background-color: #4B0082; /* Imperial Purple footer */
-      color: #C8A2C8; /* Lilac accent */
-      margin-top: 2rem;
-      font-family: 'Playfair Display', serif;
-    }
-  </style>
-</head>
-<body>
-
-  <div class="glitch-header" data-text="Luxe vs the World">Luxe vs the World</div>
-
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="blog.html">Blog</a>
-    <a href="about.html">About Me</a>
-    <a href="verse.html">Verse of the Day</a>
-    <a href="https://www.instagram.com/lvwblog/" target="_blank">Socials</a>
-  </nav>
-
-  <main>
-    <h2 class="section-title">about me:</h2>
-
-    <div class="about-box">
-      <p><strong>name:</strong> Shaluxe</p>
-      <p><strong>mission:</strong> Sharing the gospel one post at a time.</p>
-      <p><strong>likes:</strong> Worshipping God, Reading, Sewing, Crocheting, Collecting Vinyls.</p>
-      <p><strong>currently looping:</strong> "Surrounded By Holy - Bethel Music & Zahriya Zachary"</p>
-    </div>
-  </main>
-
-  <footer>
-    <p>&copy; 2025 Luxe vs the World. All Rights Reserved — but freely given by Grace ✨</p>
-  </footer>
-
-  <script src="script.js"></script>
-</body>
-</html>
+footer {
+  text-align: center;
+  padding: 1.5rem 0;
+  background-color: #4B0082; /* Imperial Purple footer */
+  color: #C8A2C8; /* Lilac accent */
+  margin-top: 2rem;
+  font-family: 'Playfair Display', serif;
+  width: 100%;
+}
