@@ -31,7 +31,7 @@ p, li {
 .glitch-header {
   font-family: 'Press Start 2P', cursive;
   font-size: 2.5rem;
-  color: #ff77aa;
+  color: #63088a;
   position: relative;
   text-align: center;
   margin-bottom: 2rem;
@@ -48,13 +48,13 @@ p, li {
 
 .glitch-header::before {
   left: 2px;
-  color: #ff00ff;
+  color: ##d591f2;
   animation: glitch 0.8s infinite linear alternate-reverse;
 }
 
 .glitch-header::after {
   left: -2px;
-  color: #00ffff;
+  color: ##d591f2;
   animation: glitch 0.8s infinite linear alternate-reverse;
 }
 
